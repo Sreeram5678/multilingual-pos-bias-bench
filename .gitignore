@@ -1,0 +1,22 @@
+# Environment variables & secrets
+.env
+*.env
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.DS_Store
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Cache directories
+results/raw/cache/
+results/raw/*.jsonl
+cache/
+
+# IDE files
+.vscode/
+.idea/
