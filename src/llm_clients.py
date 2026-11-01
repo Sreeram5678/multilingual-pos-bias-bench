@@ -112,8 +112,8 @@ class GeminiClient(BaseLLMClient):
         max_retries = 10
         for attempt in range(max_retries):
             try:
-                # Gemini Free Tier has 15 RPM limit -> 5.0s pace gives exactly 12 RPM (guaranteed safe headroom)
-                time.sleep(5.0)
+                # 1.5s pace gives safe throughput with backoff on rate limits
+                time.sleep(1.5)
                 res = requests.post(url, headers=headers, json=payload, timeout=30)
                 if res.status_code == 200:
                     data = res.json()
@@ -125,6 +125,9 @@ class GeminiClient(BaseLLMClient):
                         return text
                     return ""
                 elif res.status_code in [429, 503]:
+                    err_msg = res.text
+                    if "per day limit exceeded" in err_msg.lower() or "daily" in err_msg.lower():
+                        raise RuntimeError(f"Gemini API Daily Quota Exceeded for {model}: {err_msg}")
                     wait_time = 20.0 + (attempt * 10.0)
                     print(f"\n[Gemini RateLimit {res.status_code}] Cooling down for {wait_time:.1f}s (Attempt {attempt+1}/{max_retries})...")
                     time.sleep(wait_time)

@@ -77,18 +77,26 @@ def run_tydiqa_benchmark(
     out_dir = "results/tables"
     os.makedirs(out_dir, exist_ok=True)
     df = pd.DataFrame(records)
-    csv_file = os.path.join(out_dir, f"tydiqa_results_{provider}.csv")
+    csv_file = os.path.join(out_dir, f"tydiqa_results_{model}.csv")
     df.to_csv(csv_file, index=False)
+    provider_csv = os.path.join(out_dir, f"tydiqa_results_{provider}.csv")
+    df.to_csv(provider_csv, index=False)
     print(f"\n[Saved] Detailed evaluation log to {csv_file}")
+    print(f"[Saved] Detailed evaluation log to {provider_csv}")
 
     # Summary table
     depth_col = "original_depth" if "original_depth" in df.columns else "depth"
-    summary = df.groupby(["language", "mitigation", depth_col])["exact_match"].agg(["count", "mean"]).reset_index()
-    summary["accuracy_%"] = (summary["mean"] * 100).round(1)
-    print("\n" + "=" * 50)
-    print(" RESULTS BREAKDOWN (Accuracy by Depth)")
-    print("=" * 50)
-    print(summary[["language", "mitigation", depth_col, "count", "accuracy_%"]].to_string(index=False))
+    summary = df.groupby(["language", "mitigation", depth_col]).agg(
+        count=("exact_match", "count"),
+        exact_match=("exact_match", "mean"),
+        f1=("f1", "mean")
+    ).reset_index()
+    summary["em_%"] = (summary["exact_match"] * 100).round(1)
+    summary["f1_%"] = (summary["f1"] * 100).round(1)
+    print("\n" + "=" * 65)
+    print(" RESULTS BREAKDOWN (Exact Match & F1 by Depth)")
+    print("=" * 65)
+    print(summary[["language", "mitigation", depth_col, "count", "em_%", "f1_%"]].to_string(index=False))
 
     return df
 

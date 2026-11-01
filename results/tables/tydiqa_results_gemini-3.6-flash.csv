@@ -1,0 +1,12 @@
+model,provider,sample_id,language,depth,original_depth,mitigation,question,gold_answer,prediction,exact_match,f1
+gemini-3.6-flash,gemini,english_english--3215621880858840488-2,english,0.0,0.0,baseline,What is a way to increase your wound healing speed?,Wound care,,0,0.0
+gemini-3.6-flash,gemini,english_english--3215621880858840488-2,english,0.0,0.0,decr,What is a way to increase your wound healing speed?,Wound care,,0,0.0
+gemini-3.6-flash,gemini,english_english--3215621880858840488-2,english,0.5,0.5,baseline,What is a way to increase your wound healing speed?,Wound care,,0,0.0
+gemini-3.6-flash,gemini,english_english--3215621880858840488-2,english,0.5,0.5,decr,What is a way to increase your wound healing speed?,Wound care,Text,0,0.0
+gemini-3.6-flash,gemini,english_english--3215621880858840488-2,english,1.0,1.0,baseline,What is a way to increase your wound healing speed?,Wound care,,0,0.0
+gemini-3.6-flash,gemini,english_english--3215621880858840488-2,english,1.0,1.0,decr,What is a way to increase your wound healing speed?,Wound care,W,1,0.0
+gemini-3.6-flash,gemini,english_english-5888115353945373749-2,english,0.0,0.0,baseline,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,,0,0.0
+gemini-3.6-flash,gemini,english_english-5888115353945373749-2,english,0.0,0.0,decr,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Based on,0,0.0
+gemini-3.6-flash,gemini,english_english-5888115353945373749-2,english,0.5,0.5,baseline,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,,0,0.0
+gemini-3.6-flash,gemini,english_english-5888115353945373749-2,english,0.5,0.5,decr,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Based on,0,0.0
+gemini-3.6-flash,gemini,english_english-5888115353945373749-2,english,1.0,1.0,decr,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Based on,0,0.0
