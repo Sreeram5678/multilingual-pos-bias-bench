@@ -55,7 +55,7 @@ class GroqClient(BaseLLMClient):
         from groq import Groq
         self.client = Groq(api_key=self.api_key)
 
-    def generate(self, prompt: str, model: str = "qwen/qwen3.8-27b", temperature: float = 0.0, max_tokens: int = 40) -> str:
+    def generate(self, prompt: str, model: str = "openai/gpt-oss-120b", temperature: float = 0.0, max_tokens: int = 300) -> str:
         cache_key = get_cache_key(model, prompt, temperature)
         cached = read_from_cache(cache_key)
         if cached is not None:
@@ -65,22 +65,23 @@ class GroqClient(BaseLLMClient):
         for attempt in range(max_retries):
             try:
                 # Groq Free Tier has 8,000 TPM limit.
-                # Sleeping 25s ensures we never exceed 2 requests/minute when prompts are 3.5k-4.5k tokens.
-                time.sleep(25.0)
+                # A 22-second pause guarantees at most ~3-4k tokens per minute, well under 8k TPM.
+                time.sleep(22.0)
+                eff_max_tokens = max(max_tokens, 250) if ("gpt-oss" in model or "reason" in model) else max_tokens
                 response = self.client.chat.completions.create(
                     model=model,
                     messages=[{"role": "user", "content": prompt}],
                     temperature=temperature,
-                    max_tokens=max_tokens
+                    max_tokens=eff_max_tokens
                 )
-                text = response.choices[0].message.content.strip()
+                text = (response.choices[0].message.content or "").strip()
                 write_to_cache(cache_key, model, prompt, text)
                 return text
             except Exception as e:
                 err_str = str(e).lower()
                 if "rate limit" in err_str or "429" in err_str:
-                    wait_time = 45.0 + (attempt * 15.0)
-                    print(f"\n[Groq RateLimit 429] Respecting 8k TPM limit: cooling down for {wait_time:.1f}s (Attempt {attempt+1}/{max_retries})...")
+                    wait_time = 35.0 + (attempt * 10.0)
+                    print(f"\n[Groq RateLimit 429] Cooling down for {wait_time:.1f}s (Attempt {attempt+1}/{max_retries})...")
                     time.sleep(wait_time)
                 else:
                     print(f"[Groq Error] {e}")

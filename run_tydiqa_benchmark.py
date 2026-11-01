@@ -77,7 +77,8 @@ def run_tydiqa_benchmark(
     out_dir = "results/tables"
     os.makedirs(out_dir, exist_ok=True)
     df = pd.DataFrame(records)
-    csv_file = os.path.join(out_dir, f"tydiqa_results_{model}.csv")
+    clean_model = model.replace("/", "-")
+    csv_file = os.path.join(out_dir, f"tydiqa_results_{clean_model}.csv")
     df.to_csv(csv_file, index=False)
     provider_csv = os.path.join(out_dir, f"tydiqa_results_{provider}.csv")
     df.to_csv(provider_csv, index=False)
