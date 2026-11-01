@@ -66,18 +66,23 @@ All files are neatly arranged inside this folder:
 ```
 RESEARCH_PAPER_PACKAGE/
 ├── figures/
-│   ├── fig1_position_bias.png/.pdf          # Position accuracy curves across models
-│   ├── fig2_token_fertility.png             # Cross-lingual token inflation bar chart
-│   ├── fig3_multilingual_disparity.png/.pdf # English vs Hindi vs Telugu disparity
-│   ├── fig4_mitigation_efficacy.png/.pdf    # Synthetic benchmark baseline vs DECR
-│   └── fig5_tydiqa_telugu_f1_position.png/.pdf # Natural TyDi QA Telugu F1 decay & recovery
+│   ├── fig1_master_multimodel_position_bias.png/.pdf # Master dual-panel curves (English vs Telugu for ALL models)
+│   ├── fig2_token_fertility_unified.png/.pdf         # Tokens/word & total prompt token footprint (3.63x inflation)
+│   ├── fig3_master_mitigation_efficacy.png/.pdf      # Grouped bar chart: Baseline vs DECR across ALL models
+│   ├── fig4_master_architecture_heatmap.png/.pdf     # Matrix heatmap: Primacy, Middle, Recency for ALL models
+│   ├── fig5_crosslingual_script_gap.png/.pdf         # English vs Telugu script retention under expansion
+│   ├── fig6_multiprovider_groq_vs_gemini.png/.pdf    # Cross-provider comparison (Groq LPU vs Google Gemini)
+│   └── fig7_parameter_scaling_20b_vs_120b.png/.pdf   # Parameter scaling impact (20B vs 120B capacity uplift)
 ├── tables/
-│   ├── tab1_token_fertility.tex             # Ready-to-use LaTeX table for Overleaf
-│   ├── tab2_position_metrics_summary.csv    # Summary of metrics (LIM gap, primacy, recency)
-│   ├── tydiqa_results_gemini.csv            # Detailed evaluation records on TyDi QA
-│   └── all_evaluation_records.csv           # 252 full inference logs
+│   ├── tab1_token_fertility.tex                      # Ready-to-use LaTeX table for Overleaf
+│   ├── tab2_position_metrics_summary.csv             # Summary of metrics across depths
+│   ├── tydiqa_results_gemini-3.5-flash-lite.csv      # Full 60 conditions on TyDi QA
+│   ├── tydiqa_results_gemini-3.1-flash-lite.csv      # Full 60 conditions on TyDi QA
+│   ├── tydiqa_results_openai-gpt-oss-120b.csv        # Full 60 conditions on TyDi QA
+│   ├── tydiqa_results_openai-gpt-oss-20b.csv         # Full 60 conditions on TyDi QA
+│   └── all_evaluation_records.csv                    # Synthetic passkey evaluations across models
 └── data_samples/
-    └── tydiqa_eval_data.json                # Raw Wikipedia articles and gold QA pairs
+    └── tydiqa_eval_data.json                         # Raw Wikipedia articles and gold QA pairs
 ```
 
 ---

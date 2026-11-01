@@ -1,61 +1,65 @@
 model,provider,sample_id,language,depth,original_depth,mitigation,question,gold_answer,prediction,exact_match,f1
-gemini-3.1-flash-lite,gemini,english_english--3215621880858840488-2,english,0.0,0.0,baseline,What is a way to increase your wound healing speed?,Wound care,Wound care.,1,1.0
-gemini-3.1-flash-lite,gemini,english_english--3215621880858840488-2,english,0.0,0.0,decr,What is a way to increase your wound healing speed?,Wound care,Cleaning and protection.,0,0.0
-gemini-3.1-flash-lite,gemini,english_english--3215621880858840488-2,english,0.5,0.5,baseline,What is a way to increase your wound healing speed?,Wound care,Wound care.,1,1.0
-gemini-3.1-flash-lite,gemini,english_english--3215621880858840488-2,english,0.5,0.5,decr,What is a way to increase your wound healing speed?,Wound care,Cleaning and protecting wounds.,0,0.0
-gemini-3.1-flash-lite,gemini,english_english--3215621880858840488-2,english,1.0,1.0,baseline,What is a way to increase your wound healing speed?,Wound care,Wound care.,1,1.0
-gemini-3.1-flash-lite,gemini,english_english--3215621880858840488-2,english,1.0,1.0,decr,What is a way to increase your wound healing speed?,Wound care,Cleaning and protecting wounds.,0,0.0
-gemini-3.1-flash-lite,gemini,english_english-5888115353945373749-2,english,0.0,0.0,baseline,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Amos and Wilfrid Ayre,1,1.0
-gemini-3.1-flash-lite,gemini,english_english-5888115353945373749-2,english,0.0,0.0,decr,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Answer: Amos and Wilfrid Ayre,1,0.8889
-gemini-3.1-flash-lite,gemini,english_english-5888115353945373749-2,english,0.5,0.5,baseline,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Amos and Wilfrid Ayre,1,1.0
-gemini-3.1-flash-lite,gemini,english_english-5888115353945373749-2,english,0.5,0.5,decr,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Answer: Amos and Wilfrid Ayre,1,0.8889
-gemini-3.1-flash-lite,gemini,english_english-5888115353945373749-2,english,1.0,1.0,baseline,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Amos and Wilfrid Ayre,1,1.0
-gemini-3.1-flash-lite,gemini,english_english-5888115353945373749-2,english,1.0,1.0,decr,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Answer: Amos and Wilfrid Ayre,1,0.8889
-gemini-3.1-flash-lite,gemini,english_english--8455955749391491801-5,english,0.0,0.0,baseline,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet.,1,0.8889
-gemini-3.1-flash-lite,gemini,english_english--8455955749391491801-5,english,0.0,0.0,decr,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet.,1,0.8889
-gemini-3.1-flash-lite,gemini,english_english--8455955749391491801-5,english,0.5,0.5,baseline,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet.,1,0.8889
-gemini-3.1-flash-lite,gemini,english_english--8455955749391491801-5,english,0.5,0.5,decr,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet.,1,0.8889
-gemini-3.1-flash-lite,gemini,english_english--8455955749391491801-5,english,1.0,1.0,baseline,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet.,1,0.8889
-gemini-3.1-flash-lite,gemini,english_english--8455955749391491801-5,english,1.0,1.0,decr,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet.,1,0.8889
-gemini-3.1-flash-lite,gemini,english_english--3784698701089424208-2,english,0.0,0.0,baseline,How many units has Agatha Christie sold?,2 billion copies,Roughly 2 billion copies.,1,0.8571
-gemini-3.1-flash-lite,gemini,english_english--3784698701089424208-2,english,0.0,0.0,decr,How many units has Agatha Christie sold?,2 billion copies,Answer: Roughly 2 billion copies.,1,0.75
-gemini-3.1-flash-lite,gemini,english_english--3784698701089424208-2,english,0.5,0.5,baseline,How many units has Agatha Christie sold?,2 billion copies,Roughly 2 billion copies.,1,0.8571
-gemini-3.1-flash-lite,gemini,english_english--3784698701089424208-2,english,0.5,0.5,decr,How many units has Agatha Christie sold?,2 billion copies,Answer: Roughly 2 billion copies.,1,0.75
-gemini-3.1-flash-lite,gemini,english_english--3784698701089424208-2,english,1.0,1.0,baseline,How many units has Agatha Christie sold?,2 billion copies,Roughly 2 billion copies.,1,0.8571
-gemini-3.1-flash-lite,gemini,english_english--3784698701089424208-2,english,1.0,1.0,decr,How many units has Agatha Christie sold?,2 billion copies,Answer: Roughly 2 billion copies.,1,0.75
-gemini-3.1-flash-lite,gemini,english_english--4163667823969277427-3,english,0.0,0.0,baseline,When was Nájera established?,923,Not mentioned.,0,0.0
-gemini-3.1-flash-lite,gemini,english_english--4163667823969277427-3,english,0.0,0.0,decr,When was Nájera established?,923,Information not provided.,0,0.0
-gemini-3.1-flash-lite,gemini,english_english--4163667823969277427-3,english,0.5,0.5,baseline,When was Nájera established?,923,Not mentioned.,0,0.0
-gemini-3.1-flash-lite,gemini,english_english--4163667823969277427-3,english,0.5,0.5,decr,When was Nájera established?,923,Information not provided.,0,0.0
-gemini-3.1-flash-lite,gemini,english_english--4163667823969277427-3,english,1.0,1.0,baseline,When was Nájera established?,923,Not mentioned in documents.,0,0.0
-gemini-3.1-flash-lite,gemini,english_english--4163667823969277427-3,english,1.0,1.0,decr,When was Nájera established?,923,Information not provided.,0,0.0
-gemini-3.1-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,0.0,0.0,baseline,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,సమాధానం: ఐదు.,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,0.0,0.0,decr,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,సమాధానం: ఐదు మహాసముద్రాలు ఉన్నాయి.,1,0.4
-gemini-3.1-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,0.5,0.5,baseline,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,సమాధానం: ఐదు.,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,0.5,0.5,decr,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,సమాధానం: ఐదు మహా సముద్రాలు ఉన్నాయి.,1,0.3333
-gemini-3.1-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,1.0,1.0,baseline,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,సమాధానం: ఐదు.,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,1.0,1.0,decr,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,సమాధానం: ఐదు మహా సముద్రాలు ఉన్నాయి.,1,0.3333
-gemini-3.1-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,0.0,0.0,baseline,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,సమాధానం: 16వ ముఖ్యమంత్రి,1,0.0
-gemini-3.1-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,0.0,0.0,decr,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,సమాధానం: 16వ ముఖ్యమంత్రి.,1,0.0
-gemini-3.1-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,0.5,0.5,baseline,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,సమాధానం: 16వ ముఖ్యమంత్రి,1,0.0
-gemini-3.1-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,0.5,0.5,decr,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,సమాధానం: 16వ ముఖ్యమంత్రి.,1,0.0
-gemini-3.1-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,1.0,1.0,baseline,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,సమాధానం: 16వ ముఖ్యమంత్రి,1,0.0
-gemini-3.1-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,1.0,1.0,decr,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,సమాధానం: 16వ ముఖ్యమంత్రి.,1,0.0
-gemini-3.1-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,0.0,0.0,baseline,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,సమాధానం: 521211,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,0.0,0.0,decr,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,సమాధానం: 521211,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,0.5,0.5,baseline,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,సమాధానం: 521211,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,0.5,0.5,decr,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,సమాధానం: 521211,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,1.0,1.0,baseline,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,సమాధానం: 521211,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,1.0,1.0,decr,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,సమాధానం: 521211,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,0.0,0.0,baseline,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,1948 జనవరి 1న,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,0.0,0.0,decr,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,సమాధానం: 1948 జనవరి 1న,1,0.5714
-gemini-3.1-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,0.5,0.5,baseline,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,సమాధానం: 1948 జనవరి 1న,1,0.5714
-gemini-3.1-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,0.5,0.5,decr,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,సమాధానం: 1948 జనవరి 1న,1,0.5714
-gemini-3.1-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,1.0,1.0,baseline,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,సమాధానం: 1948 జనవరి 1న,1,0.5714
-gemini-3.1-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,1.0,1.0,decr,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,సమాధానం: 1948 జనవరి 1న,1,0.5714
-gemini-3.1-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,0.0,0.0,baseline,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,సమాధానం: 524101,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,0.0,0.0,decr,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,సమాధానం: 524101,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,0.5,0.5,baseline,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,సమాధానం: 524101,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,0.5,0.5,decr,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,సమాధానం: 524101,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,1.0,1.0,baseline,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,సమాధానం: 524101,1,0.6667
-gemini-3.1-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,1.0,1.0,decr,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,సమాధానం: 524101,1,0.6667
+gemini-3.5-flash-lite,gemini,english_english--3215621880858840488-2,english,0.0,0.0,baseline,What is a way to increase your wound healing speed?,Wound care,Wound care,1,1.0
+gemini-3.5-flash-lite,gemini,english_english--3215621880858840488-2,english,0.0,0.0,decr,What is a way to increase your wound healing speed?,Wound care,"Based on the provided documents, a way to increase wound healing speed is:
+
+Wound care",1,0.2353
+gemini-3.5-flash-lite,gemini,english_english--3215621880858840488-2,english,0.5,0.5,baseline,What is a way to increase your wound healing speed?,Wound care,Wound care,1,1.0
+gemini-3.5-flash-lite,gemini,english_english--3215621880858840488-2,english,0.5,0.5,decr,What is a way to increase your wound healing speed?,Wound care,"Based on the provided documents, a way to increase wound healing speed is:
+
+Wound care",1,0.2353
+gemini-3.5-flash-lite,gemini,english_english--3215621880858840488-2,english,1.0,1.0,baseline,What is a way to increase your wound healing speed?,Wound care,Wound care,1,1.0
+gemini-3.5-flash-lite,gemini,english_english--3215621880858840488-2,english,1.0,1.0,decr,What is a way to increase your wound healing speed?,Wound care,Wound care,1,1.0
+gemini-3.5-flash-lite,gemini,english_english-5888115353945373749-2,english,0.0,0.0,baseline,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Brothers Amos and Wilfrid Ayre,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english-5888115353945373749-2,english,0.0,0.0,decr,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Brothers Amos and Wilfrid Ayre,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english-5888115353945373749-2,english,0.5,0.5,baseline,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Amos and Wilfrid Ayre,1,1.0
+gemini-3.5-flash-lite,gemini,english_english-5888115353945373749-2,english,0.5,0.5,decr,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Brothers Amos and Wilfrid Ayre,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english-5888115353945373749-2,english,1.0,1.0,baseline,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Brothers Amos and Wilfrid Ayre,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english-5888115353945373749-2,english,1.0,1.0,decr,Who founded the Burntisland Shipbuilding Company?,Amos and Wilfrid Ayre,Brothers Amos and Wilfrid Ayre,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english--8455955749391491801-5,english,0.0,0.0,baseline,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english--8455955749391491801-5,english,0.0,0.0,decr,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english--8455955749391491801-5,english,0.5,0.5,baseline,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english--8455955749391491801-5,english,0.5,0.5,decr,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english--8455955749391491801-5,english,1.0,1.0,baseline,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english--8455955749391491801-5,english,1.0,1.0,decr,What is the surface area of the human cortex?,1.3 square feet,About 1.3 square feet,1,0.8889
+gemini-3.5-flash-lite,gemini,english_english--3784698701089424208-2,english,0.0,0.0,baseline,How many units has Agatha Christie sold?,2 billion copies,Roughly 2 billion copies.,1,0.8571
+gemini-3.5-flash-lite,gemini,english_english--3784698701089424208-2,english,0.0,0.0,decr,How many units has Agatha Christie sold?,2 billion copies,Roughly 2 billion copies.,1,0.8571
+gemini-3.5-flash-lite,gemini,english_english--3784698701089424208-2,english,0.5,0.5,baseline,How many units has Agatha Christie sold?,2 billion copies,Roughly 2 billion copies,1,0.8571
+gemini-3.5-flash-lite,gemini,english_english--3784698701089424208-2,english,0.5,0.5,decr,How many units has Agatha Christie sold?,2 billion copies,Roughly 2 billion copies.,1,0.8571
+gemini-3.5-flash-lite,gemini,english_english--3784698701089424208-2,english,1.0,1.0,baseline,How many units has Agatha Christie sold?,2 billion copies,Roughly 2 billion copies.,1,0.8571
+gemini-3.5-flash-lite,gemini,english_english--3784698701089424208-2,english,1.0,1.0,decr,How many units has Agatha Christie sold?,2 billion copies,Roughly 2 billion copies.,1,0.8571
+gemini-3.5-flash-lite,gemini,english_english--4163667823969277427-3,english,0.0,0.0,baseline,When was Nájera established?,923,"Based on the provided documents, the text does not state when Nájera was established; it only mentions that it was conquered in 923.",1,0.0833
+gemini-3.5-flash-lite,gemini,english_english--4163667823969277427-3,english,0.0,0.0,decr,When was Nájera established?,923,"Based on the provided documents, there is no mention of when Nájera was established (it only mentions that it was conquered in 923).",1,0.0833
+gemini-3.5-flash-lite,gemini,english_english--4163667823969277427-3,english,0.5,0.5,baseline,When was Nájera established?,923,"Based on the provided documents, the text does not state when Nájera was established; it only mentions that it was conquered in 923.",1,0.0833
+gemini-3.5-flash-lite,gemini,english_english--4163667823969277427-3,english,0.5,0.5,decr,When was Nájera established?,923,"Based on the provided documents, there is no mention of when Nájera was established (it only mentions it was conquered in 923).",1,0.087
+gemini-3.5-flash-lite,gemini,english_english--4163667823969277427-3,english,1.0,1.0,baseline,When was Nájera established?,923,"Based on the provided documents, there is no mention of when Nájera was established (it only mentions it was conquered in 923).",1,0.087
+gemini-3.5-flash-lite,gemini,english_english--4163667823969277427-3,english,1.0,1.0,decr,When was Nájera established?,923,"Based on the provided documents, there is no mention of when Nájera was established (it only mentions it was conquered in 923).",1,0.087
+gemini-3.5-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,0.0,0.0,baseline,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,ఐదు మహాసాగరాలు ఉన్నాయి.,1,0.5
+gemini-3.5-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,0.0,0.0,decr,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,ఐదు (5).,1,0.6667
+gemini-3.5-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,0.5,0.5,baseline,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,ఐదు మహాసాగరాలు ఉన్నాయి.,1,0.5
+gemini-3.5-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,0.5,0.5,decr,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,ఐదు మహాసముద్రాలు ఉన్నాయి.,1,0.5
+gemini-3.5-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,1.0,1.0,baseline,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,ఐదు (5) వేరు వేరు మహాసాగరాలుగా గుర్తిస్తారు.,1,0.2857
+gemini-3.5-flash-lite,gemini,telugu_telugu--2245295572008910947-0,telugu,1.0,1.0,decr,మహా సముద్రాలు ఎన్ని ఉన్నాయి?,ఐదు,ఐదు మహాసముద్రాలు ఉన్నాయి.,1,0.5
+gemini-3.5-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,0.0,0.0,baseline,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,16 వ,1,0.6667
+gemini-3.5-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,0.0,0.0,decr,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,16 వ ముఖ్యమంత్రి,1,0.5
+gemini-3.5-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,0.5,0.5,baseline,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,16 వ ముఖ్యమంత్రి,1,0.5
+gemini-3.5-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,0.5,0.5,decr,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,16 వ ముఖ్యమంత్రి,1,0.5
+gemini-3.5-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,1.0,1.0,baseline,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,16 వ ముఖ్యమంత్రి,1,0.5
+gemini-3.5-flash-lite,gemini,telugu_telugu--1627267228987440661-0,telugu,1.0,1.0,decr,నల్లారి కిరణ్ కుమార్ రెడ్డి ఆంధ్రప్రదేశ్ రాష్ట్ర ఎన్నోవ ముఖ్యమంత్రి?,16,16 వ ముఖ్యమంత్రి,1,0.5
+gemini-3.5-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,0.0,0.0,baseline,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,521211,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,0.0,0.0,decr,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,521211,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,0.5,0.5,baseline,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,521211,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,0.5,0.5,decr,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,521211,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,1.0,1.0,baseline,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,521211,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--3734307306167305418-0,telugu,1.0,1.0,decr,పిన్నమరెడ్డిపల్లి గ్రామ పిన్ కోడ్ ఏంటి?,521211,521211,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,0.0,0.0,baseline,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,1948 జనవరి 1 న,1,0.8571
+gemini-3.5-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,0.0,0.0,decr,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,1948 జనవరి 1 న,1,0.8571
+gemini-3.5-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,0.5,0.5,baseline,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,1948 జనవరి 1 న,1,0.8571
+gemini-3.5-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,0.5,0.5,decr,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,1948 జనవరి 1 న,1,0.8571
+gemini-3.5-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,1.0,1.0,baseline,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,1948 జనవరి 1 న,1,0.8571
+gemini-3.5-flash-lite,gemini,telugu_telugu-5183560750022844411-2,telugu,1.0,1.0,decr,కెందుఝర్ జిల్లా ఎప్పుడు ఏర్పడింది?,1948 జనవరి 1,1948 జనవరి 1 న,1,0.8571
+gemini-3.5-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,0.0,0.0,baseline,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,524101,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,0.0,0.0,decr,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,524101,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,0.5,0.5,baseline,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,524101,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,0.5,0.5,decr,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,524101,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,1.0,1.0,baseline,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,524101,1,1.0
+gemini-3.5-flash-lite,gemini,telugu_telugu--4111208545071789922-0,telugu,1.0,1.0,decr,పాలిచెర్లరాజుపాలెం గ్రామ పిన్ కోడ్ ఏంటి?,524101,524101,1,1.0
