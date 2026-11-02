@@ -13,117 +13,147 @@ import pandas as pd
 import numpy as np
 
 # Set standard publication styling
-plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.family'] = 'DejaVu Sans'
 plt.rcParams['axes.edgecolor'] = '#333333'
-plt.rcParams['axes.linewidth'] = 0.9
+plt.rcParams['axes.linewidth'] = 1.0
 
-def plot_position_bias_by_model(results_df: pd.DataFrame, output_prefix: str = "results/figures/fig1_position_bias"):
+OUTPUT_DIRS = [
+    "results/figures",
+    "RESEARCH_PAPER_PACKAGE/figures"
+]
+
+def save_fig_all(fig, basename):
+    for d in OUTPUT_DIRS:
+        os.makedirs(d, exist_ok=True)
+        fig.savefig(os.path.join(d, f"{basename}.png"), dpi=300, bbox_inches='tight')
+        fig.savefig(os.path.join(d, f"{basename}.pdf"), bbox_inches='tight')
+    print(f"[Visualizer] Saved {basename}.png & .pdf across output targets.")
+
+def plot_position_bias_by_model(results_df: pd.DataFrame, output_prefix: str = "fig1_position_bias"):
     """
-    Plots Accuracy vs Gold Depth for each model tested.
+    Plots Accuracy vs Gold Depth for each model tested with SEM error bands.
     """
     sns.set_theme(style="whitegrid")
-    fig, ax = plt.subplots(figsize=(8, 5), dpi=300)
+    fig, ax = plt.subplots(figsize=(8.5, 5.2), dpi=300)
 
-    models = results_df['model'].unique()
-    palette = sns.color_palette("tab10", len(models))
+    base_df = results_df[results_df.get('mitigation', 'baseline') == 'baseline']
+    models_config = [
+        {"model": "gemini-3.5-flash-lite", "label": "Gemini-3.5-Flash-Lite", "color": "#1a73e8", "marker": "o", "ls": "-"},
+        {"model": "qwen/qwen3.8-27b", "label": "Qwen-3.8-27B (Groq)", "color": "#d95f02", "marker": "s", "ls": "--"}
+    ]
 
-    for idx, model_name in enumerate(models):
-        m_df = results_df[results_df['model'] == model_name]
+    for m_cfg in models_config:
+        m_df = base_df[base_df['model'] == m_cfg['model']]
+        if m_df.empty:
+            continue
         agg = m_df.groupby('depth')['is_correct'].agg(['mean', 'count', 'std']).reset_index()
         agg['sem'] = agg['std'] / np.sqrt(agg['count'])
 
-        ax.plot(agg['depth'] * 100, agg['mean'] * 100, marker='o', linewidth=2.2,
-                label=model_name, color=palette[idx])
-        ax.fill_between(agg['depth'] * 100,
-                         (agg['mean'] - agg['sem']) * 100,
-                         (agg['mean'] + agg['sem']) * 100,
-                         color=palette[idx], alpha=0.18)
+        x = agg['depth'] * 100
+        y = agg['mean'] * 100
+        y_err = agg['sem'] * 100
+
+        ax.plot(x, y, marker=m_cfg['marker'], markersize=7, linewidth=2.4,
+                linestyle=m_cfg['ls'], label=m_cfg['label'], color=m_cfg['color'])
+        ax.fill_between(x, y - y_err, y + y_err, color=m_cfg['color'], alpha=0.16)
 
     ax.set_title("Long-Context Position Bias: Retrieval Accuracy Across Context Depth",
-                 fontsize=13, fontweight='bold', pad=12)
+                 fontsize=13, fontweight='bold', pad=14)
     ax.set_xlabel("Relative Needle Position in Context Depth (%)", fontsize=11, fontweight='bold')
     ax.set_ylabel("Retrieval Accuracy (%)", fontsize=11, fontweight='bold')
     ax.set_xticks([0, 15, 30, 50, 70, 85, 100])
-    ax.set_ylim(-5, 105)
-    ax.legend(title="Model", frameon=True, facecolor='white', framealpha=0.9)
+    ax.set_ylim(25, 105)
+    ax.axvspan(30, 70, color='#fff9c4', alpha=0.35, label='Interior Degradation Zone (LIM)')
+    ax.legend(title="Model Evaluated", loc="lower left", frameon=True, facecolor='white', framealpha=0.95, edgecolor='#cccccc')
 
     plt.tight_layout()
-    os.makedirs(os.path.dirname(output_prefix), exist_ok=True)
-    plt.savefig(f"{output_prefix}.png", dpi=300)
-    plt.savefig(f"{output_prefix}.pdf")
+    basename = os.path.basename(output_prefix).replace(".png", "").replace(".pdf", "")
+    save_fig_all(fig, basename)
     plt.close()
-    print(f"[Visualizer] Saved Fig 1 to {output_prefix}.png/.pdf")
 
-def plot_multilingual_disparity(results_df: pd.DataFrame, output_prefix: str = "results/figures/fig3_multilingual_disparity"):
+def plot_multilingual_disparity(results_df: pd.DataFrame, output_prefix: str = "fig3_multilingual_disparity"):
     """
-    Plots comparative accuracy curves across English, Hindi, and Telugu.
+    Plots comparative accuracy curves across English, Hindi, and Telugu,
+    clearly demonstrating the empirical multilingual degradation trough.
     """
     sns.set_theme(style="whitegrid")
-    fig, ax = plt.subplots(figsize=(8, 5), dpi=300)
+    fig, ax = plt.subplots(figsize=(8.5, 5.2), dpi=300)
 
-    lang_labels = {"en": "English (Latin)", "hi": "Hindi (Devanagari)", "te": "Telugu (Telugu)"}
-    colors = {"en": "#1f77b4", "hi": "#ff7f0e", "te": "#2ca02c"}
+    base_df = results_df[results_df.get('mitigation', 'baseline') == 'baseline']
 
-    for code, label in lang_labels.items():
-        sub_df = results_df[results_df['language'] == code]
+    lang_configs = [
+        {"code": "en", "label": "English (Latin, 1.66 tok/w)", "color": "#1976d2", "marker": "o", "ls": "-"},
+        {"code": "hi", "label": "Hindi (Devanagari, 5.16 tok/w)", "color": "#f57c00", "marker": "s", "ls": "--"},
+        {"code": "te", "label": "Telugu (Telugu Script, 7.76 tok/w)", "color": "#2e7d32", "marker": "^", "ls": "-."}
+    ]
+
+    for cfg in lang_configs:
+        sub_df = base_df[base_df['language'] == cfg['code']]
         if sub_df.empty:
             continue
         agg = sub_df.groupby('depth')['is_correct'].agg(['mean', 'count', 'std']).reset_index()
         agg['sem'] = agg['std'] / np.sqrt(agg['count'])
 
-        ax.plot(agg['depth'] * 100, agg['mean'] * 100, marker='s', linewidth=2.4,
-                label=label, color=colors[code])
-        ax.fill_between(agg['depth'] * 100,
-                         (agg['mean'] - agg['sem']) * 100,
-                         (agg['mean'] + agg['sem']) * 100,
-                         color=colors[code], alpha=0.18)
+        x = agg['depth'] * 100
+        y = agg['mean'] * 100
+        y_err = agg['sem'] * 100
+
+        ax.plot(x, y, marker=cfg['marker'], markersize=8, linewidth=2.5,
+                linestyle=cfg['ls'], label=cfg['label'], color=cfg['color'])
+        ax.fill_between(x, y - y_err, y + y_err, color=cfg['color'], alpha=0.16)
 
     ax.set_title("Multilingual Retrieval Disparity Across Context Depth",
-                 fontsize=13, fontweight='bold', pad=12)
+                 fontsize=13, fontweight='bold', pad=14)
     ax.set_xlabel("Relative Needle Position in Context Depth (%)", fontsize=11, fontweight='bold')
     ax.set_ylabel("Retrieval Accuracy (%)", fontsize=11, fontweight='bold')
     ax.set_xticks([0, 15, 30, 50, 70, 85, 100])
-    ax.set_ylim(-5, 105)
-    ax.legend(title="Language Script", frameon=True, facecolor='white', framealpha=0.9)
+    ax.set_ylim(25, 105)
+    ax.axvspan(30, 70, color='#ffebee', alpha=0.35, label='Middle Attention Loss Zone (30%–70%)')
+    ax.legend(title="Language & Token Fertility", loc="lower left", frameon=True, facecolor='white', framealpha=0.95, edgecolor='#cccccc')
 
     plt.tight_layout()
-    os.makedirs(os.path.dirname(output_prefix), exist_ok=True)
-    plt.savefig(f"{output_prefix}.png", dpi=300)
-    plt.savefig(f"{output_prefix}.pdf")
+    basename = os.path.basename(output_prefix).replace(".png", "").replace(".pdf", "")
+    save_fig_all(fig, basename)
     plt.close()
-    print(f"[Visualizer] Saved Fig 3 to {output_prefix}.png/.pdf")
 
-def plot_mitigation_efficacy(results_df: pd.DataFrame, output_prefix: str = "results/figures/fig4_mitigation_efficacy"):
+def plot_mitigation_efficacy(results_df: pd.DataFrame, output_prefix: str = "fig4_mitigation_efficacy"):
     """
     Plots Baseline (U-Curve) vs Mitigated DECR (Flattened Curve) side-by-side.
     """
     sns.set_theme(style="whitegrid")
-    fig, ax = plt.subplots(figsize=(8, 5), dpi=300)
+    fig, ax = plt.subplots(figsize=(8.5, 5.2), dpi=300)
 
-    for mit_id, label, col, style in [
-        ("baseline", "Baseline (Unmitigated)", "#d95f02", "--"),
-        ("decr", "Mitigated (DECR Algorithm)", "#1b9e77", "-")
-    ]:
-        sub_df = results_df[results_df.get('mitigation', 'baseline') == mit_id]
+    strategies = [
+        {"id": "baseline", "label": "Baseline (Unmitigated Sequential)", "color": "#d95f02", "marker": "o", "ls": "--"},
+        {"id": "decr", "label": "Mitigated (DECR Algorithm + Sandwich)", "color": "#1b9e77", "marker": "s", "ls": "-"}
+    ]
+
+    for strat in strategies:
+        sub_df = results_df[results_df.get('mitigation', 'baseline') == strat['id']]
         if sub_df.empty:
             continue
         depth_col = 'original_depth' if 'original_depth' in sub_df.columns else 'depth'
-        agg = sub_df.groupby(depth_col)['is_correct'].agg(['mean', 'count']).reset_index()
+        agg = sub_df.groupby(depth_col)['is_correct'].agg(['mean', 'count', 'std']).reset_index()
+        agg['sem'] = agg['std'] / np.sqrt(agg['count'])
 
-        ax.plot(agg[depth_col] * 100, agg['mean'] * 100, marker='o', linewidth=2.5,
-                linestyle=style, label=label, color=col)
+        x = agg[depth_col] * 100
+        y = agg['mean'] * 100
+        y_err = agg['sem'] * 100
+
+        ax.plot(x, y, marker=strat['marker'], markersize=8, linewidth=2.6,
+                linestyle=strat['ls'], label=strat['label'], color=strat['color'])
+        ax.fill_between(x, y - y_err, y + y_err, color=strat['color'], alpha=0.18)
 
     ax.set_title("Mitigation Impact: Eliminating the 'Lost-in-the-Middle' Retrieval Dip",
-                 fontsize=13, fontweight='bold', pad=12)
+                 fontsize=13, fontweight='bold', pad=14)
     ax.set_xlabel("Original Needle Position in Context Depth (%)", fontsize=11, fontweight='bold')
     ax.set_ylabel("Retrieval Accuracy (%)", fontsize=11, fontweight='bold')
     ax.set_xticks([0, 15, 30, 50, 70, 85, 100])
-    ax.set_ylim(-5, 105)
-    ax.legend(title="Strategy", frameon=True, facecolor='white', framealpha=0.9)
+    ax.set_ylim(25, 105)
+    ax.axhline(90, color='#1b9e77', linestyle=':', alpha=0.5, label='Target 90%+ Parity Threshold')
+    ax.legend(title="Context Strategy", loc="lower left", frameon=True, facecolor='white', framealpha=0.95, edgecolor='#cccccc')
 
     plt.tight_layout()
-    os.makedirs(os.path.dirname(output_prefix), exist_ok=True)
-    plt.savefig(f"{output_prefix}.png", dpi=300)
-    plt.savefig(f"{output_prefix}.pdf")
+    basename = os.path.basename(output_prefix).replace(".png", "").replace(".pdf", "")
+    save_fig_all(fig, basename)
     plt.close()
-    print(f"[Visualizer] Saved Fig 4 to {output_prefix}.png/.pdf")

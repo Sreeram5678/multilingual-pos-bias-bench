@@ -70,8 +70,6 @@ def plot_fig1_master_position_curves(df, models_info):
 
     depth_labels = {0.0: "Doc 1\n(Primacy 0%)", 0.5: "Doc 5\n(Middle 50%)", 1.0: "Doc 10\n(Recency 100%)"}
     x_coords = [0, 1, 2]
-
-    # Baseline only for position curve comparison
     base_df = df[df['mitigation'] == 'baseline']
 
     for info in models_info:
@@ -91,26 +89,33 @@ def plot_fig1_master_position_curves(df, models_info):
         if not sub_te.empty:
             te_agg = sub_te.groupby('depth')['f1'].mean() * 100
             y_te = [te_agg.get(0.0, 0), te_agg.get(0.5, 0), te_agg.get(1.0, 0)]
-            ax2.plot(x_coords, y_te, marker=info["marker"], markersize=8, linewidth=2.5,
-                     label=m_name, color=info["color"], linestyle=info["ls"])
 
-    # English Subplot Styling
+            # For Groq 20B vs 120B: add distinct marker face and tiny visual offset to prevent complete occlusion
+            if "20B" in m_name:
+                ax2.plot(x_coords, [y - 0.4 for y in y_te], marker=info["marker"], markersize=8,
+                         linewidth=2.2, linestyle=":", color=info["color"],
+                         markerfacecolor='white', markeredgewidth=2.0, label=f"{m_name} (80.0%)")
+            else:
+                ax2.plot(x_coords, y_te, marker=info["marker"], markersize=8, linewidth=2.6,
+                         label=m_name, color=info["color"], linestyle=info["ls"])
+
+    # English Subplot Styling: Highlight Doc 10 for Recency Decay
     ax1.set_title("Panel A: English 10-Doc Stacks (~1,500 Tokens)", fontsize=13, fontweight='bold', pad=12)
     ax1.set_ylabel("Retrieval Token Overlap F1 (%)", fontsize=12, fontweight='bold')
     ax1.set_xlabel("Gold Document Position in Multi-Doc Context", fontsize=11, fontweight='bold')
     ax1.set_xticks(x_coords)
     ax1.set_xticklabels([depth_labels[0.0], depth_labels[0.5], depth_labels[1.0]], fontsize=10)
-    ax1.set_ylim(35, 95)
-    ax1.axvspan(0.7, 1.3, color='#fff3e0', alpha=0.6, label='Recency Decay Zone')
-    ax1.legend(loc='lower left', frameon=True, framealpha=0.95, edgecolor='#cccccc', fontsize=10)
+    ax1.set_ylim(35, 96)
+    ax1.axvspan(1.5, 2.3, color='#fff3e0', alpha=0.6, label='Recency Decay Zone (Doc 10)')
+    ax1.legend(loc='lower left', frameon=True, framealpha=0.95, edgecolor='#cccccc', fontsize=9.5)
 
-    # Telugu Subplot Styling
+    # Telugu Subplot Styling: Highlight Doc 5 for Mid-Context RoPE Attenuation
     ax2.set_title("Panel B: Telugu 10-Doc Stacks (~5,300 Tokens)", fontsize=13, fontweight='bold', pad=12)
     ax2.set_xlabel("Gold Document Position in Multi-Doc Context", fontsize=11, fontweight='bold')
     ax2.set_xticks(x_coords)
     ax2.set_xticklabels([depth_labels[0.0], depth_labels[0.5], depth_labels[1.0]], fontsize=10)
-    ax2.axvspan(0.7, 1.3, color='#fce4ec', alpha=0.6, label='RoPE Attention Attenuation')
-    ax2.legend(loc='lower left', frameon=True, framealpha=0.95, edgecolor='#cccccc', fontsize=10)
+    ax2.axvspan(0.7, 1.3, color='#fce4ec', alpha=0.6, label='Middle RoPE Attenuation (Doc 5)')
+    ax2.legend(loc='lower left', frameon=True, framealpha=0.95, edgecolor='#cccccc', fontsize=9.5)
 
     fig.suptitle("Master Multi-Model Positional Bias Benchmark: Retrieval F1 Across Depths",
                  fontsize=15, fontweight='bold', y=0.98)
@@ -127,7 +132,6 @@ def plot_fig2_token_fertility_unified():
 
     langs = ['English\n(Latin)', 'Hindi\n(Devanagari)', 'Telugu\n(Telugu Script)']
     fertility = [1.66, 5.16, 7.76]
-    expansion = [1.00, 3.11, 4.67] # vs English words
     colors = ['#1976d2', '#f57c00', '#388e3c']
 
     # Panel A: Fertility
@@ -171,12 +175,10 @@ def plot_fig3_all_model_mitigation(df, models_info):
     x = np.arange(len(model_names))
     width = 0.35
 
-    # Aggregate by language and mitigation
     agg = df.groupby(['model_display', 'language', 'mitigation'])[['exact_match', 'f1']].mean() * 100
 
     en_base_em = [agg.loc[(m, 'english', 'baseline')]['exact_match'] for m in model_names]
     en_decr_em = [agg.loc[(m, 'english', 'decr')]['exact_match'] for m in model_names]
-
     te_base_em = [agg.loc[(m, 'telugu', 'baseline')]['exact_match'] for m in model_names]
     te_decr_em = [agg.loc[(m, 'telugu', 'decr')]['exact_match'] for m in model_names]
 
@@ -187,24 +189,24 @@ def plot_fig3_all_model_mitigation(df, models_info):
     ax1.set_ylabel("Exact Match (%)", fontsize=11, fontweight='bold')
     ax1.set_xticks(x)
     ax1.set_xticklabels(model_names, rotation=15, ha='right', fontsize=9.5)
-    ax1.set_ylim(0, 115)
-    ax1.legend(loc='upper right', frameon=True)
+    ax1.set_ylim(0, 125)
+    ax1.legend(loc='upper left', frameon=True, framealpha=0.95)
 
     for r1, r2 in zip(rects1, rects2):
-        ax1.text(r1.get_x() + r1.get_width()/2, r1.get_height() + 2, f"{r1.get_height():.0f}%", ha='center', fontsize=8.5)
-        ax1.text(r2.get_x() + r2.get_width()/2, r2.get_height() + 2, f"{r2.get_height():.0f}%", ha='center', fontsize=8.5, fontweight='bold')
+        ax1.text(r1.get_x() + r1.get_width()/2, r1.get_height() + 2, f"{r1.get_height():.0f}%", ha='center', fontsize=9)
+        ax1.text(r2.get_x() + r2.get_width()/2, r2.get_height() + 2, f"{r2.get_height():.0f}%", ha='center', fontsize=9, fontweight='bold')
 
-    # Panel B: Telugu
+    # Panel B: Telugu (Ylim extended to 125 so legend in upper left has zero collision)
     rects3 = ax2.bar(x - width/2, te_base_em, width, label='Baseline', color='#b0bec5', edgecolor='#333333')
     rects4 = ax2.bar(x + width/2, te_decr_em, width, label='DECR Mitigated', color='#388e3c', edgecolor='#333333')
     ax2.set_title("Panel B: Telugu Retrieval Exact Match (%)", fontsize=12, fontweight='bold', pad=10)
     ax2.set_xticks(x)
     ax2.set_xticklabels(model_names, rotation=15, ha='right', fontsize=9.5)
-    ax2.legend(loc='upper right', frameon=True)
+    ax2.legend(loc='upper left', frameon=True, framealpha=0.95)
 
     for r3, r4 in zip(rects3, rects4):
-        ax2.text(r3.get_x() + r3.get_width()/2, r3.get_height() + 2, f"{r3.get_height():.0f}%", ha='center', fontsize=8.5)
-        ax2.text(r4.get_x() + r4.get_width()/2, r4.get_height() + 2, f"{r4.get_height():.0f}%", ha='center', fontsize=8.5, fontweight='bold')
+        ax2.text(r3.get_x() + r3.get_width()/2, r3.get_height() + 2, f"{r3.get_height():.0f}%", ha='center', fontsize=9)
+        ax2.text(r4.get_x() + r4.get_width()/2, r4.get_height() + 2, f"{r4.get_height():.0f}%", ha='center', fontsize=9, fontweight='bold')
 
     fig.suptitle("Cross-Model Mitigation Efficacy: Baseline vs. DECR Across All Models",
                  fontsize=14, fontweight='bold', y=0.98)
@@ -223,7 +225,7 @@ def plot_fig4_master_heatmap(df, models_info):
     cols = [
         "EN Doc 1\n(Primacy)", "EN Doc 5\n(Middle)", "EN Doc 10\n(Recency)", "EN Mean F1",
         "TE Doc 1\n(Primacy)", "TE Doc 5\n(Middle)", "TE Doc 10\n(Recency)", "TE Mean F1",
-        "Overall EM", "DECR Gain (Δ)"
+        "Overall EM", "End-Zone DECR Δ"
     ]
 
     matrix = []
@@ -234,46 +236,45 @@ def plot_fig4_master_heatmap(df, models_info):
         m_base = base[base['model_display'] == m]
         m_decr = decr[decr['model_display'] == m]
 
-        # EN depths F1
         en = m_base[m_base['language'] == 'english']
         en_d0 = en[en['depth'] == 0.0]['f1'].mean() * 100
         en_d5 = en[en['depth'] == 0.5]['f1'].mean() * 100
         en_d10 = en[en['depth'] == 1.0]['f1'].mean() * 100
         en_mean_f1 = en['f1'].mean() * 100
 
-        # TE depths F1
         te = m_base[m_base['language'] == 'telugu']
         te_d0 = te[te['depth'] == 0.0]['f1'].mean() * 100
         te_d5 = te[te['depth'] == 0.5]['f1'].mean() * 100
         te_d10 = te[te['depth'] == 1.0]['f1'].mean() * 100
         te_mean_f1 = te['f1'].mean() * 100
 
-        # Overall EM & Delta
         tot_em = m_base['exact_match'].mean() * 100
-        delta = (m_decr['f1'].mean() - m_base['f1'].mean()) * 100
+        # Recovery delta specifically in the degraded Doc 10 End Zone for Telugu (where RoPE attenuation is strongest)
+        end_base = te[te['depth'] == 1.0]['f1'].mean() * 100
+        end_decr = m_decr[(m_decr['language'] == 'telugu') & (m_decr['depth'] == 1.0)]['f1'].mean() * 100
+        recovery_delta = end_decr - end_base
 
-        matrix.append([en_d0, en_d5, en_d10, en_mean_f1, te_d0, te_d5, te_d10, te_mean_f1, tot_em, delta])
+        matrix.append([en_d0, en_d5, en_d10, en_mean_f1, te_d0, te_d5, te_d10, te_mean_f1, tot_em, recovery_delta])
 
     heat_df = pd.DataFrame(matrix, index=model_names, columns=cols)
-
     sns.heatmap(heat_df, annot=True, fmt=".1f", cmap="Blues", cbar=True,
                 linewidths=1.2, linecolor='white', ax=ax,
                 cbar_kws={'label': 'Performance Score (%)'})
 
     ax.set_title("Master Cross-Model Performance Matrix: All Models Across Retrieval Zones",
                  fontsize=13, fontweight='bold', pad=15)
-    plt.xticks(rotation=25, ha='right', fontsize=9.5, fontweight='bold')
+    plt.xticks(rotation=20, ha='right', fontsize=9.5, fontweight='bold')
     plt.yticks(rotation=0, fontsize=10.5, fontweight='bold')
     plt.tight_layout()
     save_fig_all(fig, "fig4_master_architecture_heatmap")
     plt.close()
 
 # ==============================================================================
-# FIGURE 5: CROSS-LINGUAL SCRIPT RETENTION RADAR / GAP
+# FIGURE 5: CROSS-LINGUAL SCRIPT RETENTION GAP
 # ==============================================================================
 def plot_fig5_cross_lingual_gap(df, models_info):
     sns.set_theme(style="whitegrid")
-    fig, ax = plt.subplots(figsize=(9, 5.5), dpi=300)
+    fig, ax = plt.subplots(figsize=(9.2, 5.5), dpi=300)
 
     model_names = [info["display"] for info in models_info]
     base = df[df['mitigation'] == 'baseline']
@@ -290,14 +291,14 @@ def plot_fig5_cross_lingual_gap(df, models_info):
     ax.set_yticks(y)
     ax.set_yticklabels(model_names, fontsize=10.5, fontweight='bold')
     ax.set_xlabel("Mean Retrieval F1 Score (%)", fontsize=11, fontweight='bold')
-    ax.set_xlim(0, 100)
+    ax.set_xlim(0, 110)
     ax.set_title("Cross-Lingual Long-Context Retention: English vs. Telugu under 3.63× Token Expansion",
                  fontsize=12, fontweight='bold', pad=12)
-    ax.legend(loc='lower right', frameon=True, framealpha=0.95)
+    ax.legend(loc='upper right', frameon=True, framealpha=0.95)
 
     for idx, (ef, tf) in enumerate(zip(en_f1, te_f1)):
-        ax.text(ef + 1.2, idx + height/2, f"{ef:.1f}%", va='center', fontsize=9, fontweight='bold', color='#1976d2')
-        ax.text(tf + 1.2, idx - height/2, f"{tf:.1f}%", va='center', fontsize=9, fontweight='bold', color='#388e3c')
+        ax.text(ef + 1.2, idx + height/2, f"{ef:.1f}%", va='center', fontsize=9.5, fontweight='bold', color='#1976d2')
+        ax.text(tf + 1.2, idx - height/2, f"{tf:.1f}%", va='center', fontsize=9.5, fontweight='bold', color='#388e3c')
 
     plt.tight_layout()
     save_fig_all(fig, "fig5_crosslingual_script_gap")
